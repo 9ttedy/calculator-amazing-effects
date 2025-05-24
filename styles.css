@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    user-select: none;
+}
+
+/* الخلفية المتحركة */
+body {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+    overflow: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+.particles-container, .stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 15s infinite linear;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(100px, 100px) rotate(360deg);
+    }
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.calculator {
+    width: 100%;
+    max-width: 350px;
+    background: rgba(40, 40, 70, 0.8);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 0 2px #6e45e2,
+                0 0 20px rgba(110, 69, 226, 0.5);
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.operation-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    height: 60px;
+}
+
+.operation-part {
+    flex: 1;
+    margin: 0 5px;
+    background: rgba(30, 30, 60, 0.7);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #ecf0f1;
+    transition: all 0.3s;
+    opacity: 0.8;
+    border: 1px solid rgba(110, 69, 226, 0.3);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.operation-part.active {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(110, 69, 226, 0.3);
+    box-shadow: 0 0 15px rgba(110, 69, 226, 0.5);
+}
+
+.display {
+    width: 100%;
+    height: 80px;
+    background: rgba(30, 30, 60, 0.7);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 36px;
+    color: #ecf0f1;
+    overflow: hidden;
+    transition: all 0.3s;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    border: 1px solid rgba(110, 69, 226, 0.3);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.display.show {
+    transform: scaleY(1);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+.btn {
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    background: rgba(30, 30, 60, 0.7);
+    color: #ecf0f1;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(110, 69, 226, 0.3);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    background: rgba(110, 69, 226, 0.5);
+    color: black;
+    font-weight: bold;
+    text-shadow: 0 0 5px white;
+    box-shadow: 0 0 15px rgba(110, 69, 226, 0.7),
+                inset 0 0 5px white;
+    border: 1px solid white;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn.highlight {
+    background: rgba(110, 69, 226, 0.7);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(110, 69, 226, 0.7);
+}
+
+.btn.operator {
+    background: rgba(110, 69, 226, 0.4);
+}
+
+.btn.operator:hover {
+    background: rgba(110, 69, 226, 0.7);
+}
+
+.btn.clear {
+    background: rgba(226, 69, 69, 0.4);
+}
+
+.btn.clear:hover {
+    background: rgba(226, 69, 69, 0.7);
+}
+
+.btn.equals {
+    background: rgba(69, 226, 110, 0.4);
+    grid-column: span 2;
+}
+
+.btn.equals:hover {
+    background: rgba(69, 226, 110, 0.7);
+}
+
+.btn.zero {
+    grid-column: span 2;
+}
+
+.click-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        max-width: 300px;
+        padding: 15px;
+    }
+    
+    .btn {
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .operation-part {
+        font-size: 20px;
+    }
+    
+    .display {
+        height: 70px;
+        font-size: 30px;
+    }
+}
